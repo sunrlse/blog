@@ -1,12 +1,12 @@
 ---
 title: react-router解读（三）
 date: 2018-08-29 15:30:12
-tags: 技术
+tags: react
 ---
 
 ### history methods createBrowserHistory
 通过之前我们已经知道了react-router-dom的<BrowserRouter> history模式使用的是history库中的createBrowserHistory方法。下面我们来一起看看其中的奥秘。
-<pre>
+``` Javascript
   var createBrowserHistory = function createBrowserHistory() {
     //  arguments[0], 由上一节可知它是一个非必传的object
     var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -267,4 +267,4 @@ tags: 技术
 
     return history;
   };
-</pre>
+```

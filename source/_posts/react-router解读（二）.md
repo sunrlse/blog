@@ -1,20 +1,20 @@
 ---
 title: react-router解读（二）
 date: 2018-08-29 14:39:31
-tags: 技术
+tags: react
 ---
 
 ### react-router 的路由实现
 
 既然知道了这个原理，我们来看下 react-router 的实现，我们打开 [react-router 项目地址](https://github.com/ReactTraining/react-router),把项目克隆下来，或则直接在 github 上预览，在 React 开发的项目里，我们通过 router.push('home') 来实现页面的跳转，所以我们检索下，push 方法的实现
 
-![push方法检索](/images/router/1.jpg)
+![push方法检索](/images/1.jpg)
 
 我们检索到了 46个 js 文件，😂，一般到这个时候，我们会放弃源码阅读，那么我们今天的文章就到这结束，谢谢大家！
 
 开个玩笑，源码阅读不能这么粗糙，react-router 4.x用法，我们只需要安装 react-router-dom。所以我们找到 package 下的 react-router-dom/modules 目录，点开 `index.js` 文件。
 
-<pre>
+``` Javascript
   export BrowserRouter from "./BrowserRouter";
   export HashRouter from "./HashRouter";
   export Link from "./Link";
@@ -29,13 +29,13 @@ tags: 技术
   export generatePath from "./generatePath";
   export matchPath from "./matchPath";
   export withRouter from "./withRouter";
-</pre>
+```
 
 看到 history 对象的实例与配置的 mode 有关，react-router-dom 通过3种方式实现了路由切换。我们今天讲的内容相匹配的是 `createBrowserHistory` 的实现方案 (另外两个分别是：createHashHistory和createMemoryHistory)。 这里 react-router-dom 将 BrowserRouter、HashRouter、Link 拆分为单独组件实现，也是与 react-router 3 之间的区别之一。
 [详细文档](https://github.com/ReactTraining/history#blocking-transitions)
 我们来看 react-router-dom 中的 BrowserRouter 源码：
 
-<pre>
+``` Javascript
     import warning from "warning";
     import React from "react";
     import PropTypes from "prop-types";
@@ -70,7 +70,7 @@ tags: 技术
     }
 
     export default BrowserRouter;
-</pre>
+```
 
 由上可知我们在项目中使用的<BrowserRouter>组件，history方式是使用了一个叫[history](https://github.com/ReactTraining/history)库中的 createBrowserHistory 方法。
 
